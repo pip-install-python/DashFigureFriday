@@ -459,4 +459,3 @@ def add_new_event(
 )
 def display_output(value, charCount):
     return value
-
