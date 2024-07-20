@@ -4,7 +4,7 @@ from dash import Output, Input, clientside_callback, dcc, page_container, State
 from components.header import create_header
 from components.navbar import create_navbar, create_navbar_drawer
 from lib.constants import PRIMARY_COLOR
-
+from dash_discord import DiscordCrate
 
 def create_appshell(data):
     return dmc.MantineProvider(
@@ -49,6 +49,24 @@ def create_appshell(data):
                     create_navbar(data),
                     create_navbar_drawer(data),
                     dmc.AppShellMain(children=page_container),
+                    DiscordCrate(
+                        id='crate',
+                        server='1246197743307980940',
+                        channel='1246197743781810332',
+                        username='Pip Install Python',
+                        avatar='https://avatars.githubusercontent.com/u/83238564',
+                        location=['bottom', 'right'],
+                        color='red',
+                        glyph=[
+                            'https://upload.wikimedia.org/wikipedia/commons/9/9f/Plotly-logomark-avatar.jpg',
+                            '75px'],
+                        notifications=True,
+                        indicator=True,
+                        timeout=5000,
+                        allChannelNotifications=True,
+                        embedNotificationTimeout=5000,
+                        defer=True,
+                    )
                 ],
                 header={"height": 70},
                 padding="xl",
