@@ -1,7 +1,7 @@
 ---
 name: Week 28
 description: SuperStore Dataset
-endpoint: /pip/week
+endpoint: /pip/week_28
 package: week_28
 icon: emojione:department-store
 ---

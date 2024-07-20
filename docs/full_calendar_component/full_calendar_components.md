@@ -16,12 +16,6 @@ icon: line-md:calendar
 pip install full-calendar-component
 ```
 
-### Introduction
-
-This is an example of a full event calendar with all views: `listWeek`,`timeGridDay`,`timeGridWeek`,`dayGridMonth`. You can add events to your calendar with `Clicking` on a day wich will pop open a modal form for you to enter content for a new event.
-
-.. exec::docs.full_calendar_component.introduction
-
 ### Render intialView
 
 You have access to these views: `dayGridMonth`, `timeGridWeek`, `timeGridDay`, `listWeek`, `dayGridWeek`, `dayGridYear`, `multiMonthYear`, `resourceTimeline`, `resourceTimeGridDay`, `resourceTimeLineWeek`. You can choose to render all or some of them via passing them as options in the headerToolbar.

@@ -77,7 +77,8 @@ p {
 
 .ql-container.ql-snow {
     border-top: 0px;
-    height: 200px !important;
+    height: 100% !important;
+    max-height: 650px !important;
 }
 
 :where([data-mantine-color-scheme='light']) .m_38a85659 {
