@@ -7,15 +7,9 @@ import full_calendar_component as fcc
 from datetime import datetime, date, timedelta
 from lib.constants import PAGE_TITLE_PREFIX
 from dash.exceptions import PreventUpdate
-import dash_quill
+from dash_summernote import DashSummernote
+import dash_dangerously_set_inner_html
 
-quill_mods = [
-    [{"header": "1"}, {"header": "2"}, {"font": []}],
-    [{"size": []}],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{"list": "ordered"}, {"list": "bullet"}, {"indent": "-1"}, {"indent": "+1"}],
-    ["link", "image"],
-]
 
 # Get today's date
 today = datetime.now()
@@ -44,14 +38,6 @@ today = datetime.now()
 
 # Format the date
 formatted_date = today.strftime("%Y-%m-%d")
-
-week_28 = """
-Hey Everyone,
-We’re excited to announce the first data set of the Figure Friday initiative 9. Every Friday Plotly will release a data set and a sample figure. The community will have one week to enhance that figure, build your own Plotly figure or create a Dash app.
-
-This week’s data set comes from Workout Wednesday and it’s a sample superstore’s sales and profit 32.
-
-"""
 
 
 events = [
@@ -273,15 +259,20 @@ layout = html.Div(
                                         ),
                                     ]
                                 ),
-                                dash_quill.Quill(
-                                    id="rich_text_input",
-                                    modules={
-                                        "toolbar": quill_mods,
-                                        "clipboard": {
-                                            "matchVisual": False,
-                                        },
-                                    },
-                                ),
+                                DashSummernote(
+                                        id='rich_text_input',
+                                        value='',
+                                        toolbar=[
+                                                    ["style", ["style"]],
+                                                    ["font", ["bold", "underline", "clear"]],
+                                                    ["fontname", ["fontname"]],
+                                                    ["para", ["ul", "ol", "paragraph"]],
+                                                    ["table", ["table"]],
+                                                    ["insert", ["link", "picture", "video"]],
+                                                    ["view", ["fullscreen", "codeview"]]
+                                                ],
+                                        height=300
+                                    ),
                                 dmc.Accordion(
                                     children=[
                                         dmc.AccordionItem(
@@ -348,21 +339,15 @@ def open_event_modal(n, clickedEvent, opened):
     if button_id == "calendar" and clickedEvent is not None:
         event_title = clickedEvent["title"]
         event_context = clickedEvent["extendedProps"]["context"]
+
         return (
             True,
             event_title,
             html.Div([
                 dmc.Space(h=10),
-                dash_quill.Quill(
-                    id="input3",
-                    value=f"{event_context}",
-                    modules={
-                        "toolbar": False,
-                        "clipboard": {
-                            "matchVisual": False,
-                        },
-                    },
-                )
+                dash_dangerously_set_inner_html.DangerouslySetInnerHTML(f'''
+                {event_context}
+                '''),
                 ],
                 style={"width": "100%", "overflowY": "auto"},
             ),
@@ -443,7 +428,10 @@ def add_new_event(
 ):
     if n is None:
         raise PreventUpdate
-
+    print("Start Date:", start_date)
+    print("Start Time:", start_time)
+    print("End Date:", end_date)
+    print("End Time:", end_time)
     start_time_obj = datetime.strptime(start_time, "%H:%M:%S")
     end_time_obj = datetime.strptime(end_time, "%H:%M:%S")
 
