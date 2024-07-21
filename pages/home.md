@@ -1,4 +1,4 @@
-## #Figure Friday
+### #Figure Friday
 
 
 ![logo](/assets/Figure_Fridays_banner.jpg)
@@ -16,3 +16,5 @@ To participate in the initiative:
 Ready, Set, Go!
 
 👉 Check out the Figure Friday tag 55 on July 12 to discover the first weekly data set.
+
+### Plotly Event Calendar
